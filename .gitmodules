@@ -10,6 +10,9 @@
 [submodule "modules/mavlink"]
 	path = modules/mavlink
 	url = https://github.com/ArduPilot/mavlink
+[submodule "modules/mavlink/pymavlink"]
+	path = modules/mavlink/pymavlink
+	url = https://github.com/ArduPilot/mavlink/pymavlink
 [submodule "gtest"]
 	path = modules/gtest
 	url = https://github.com/ArduPilot/googletest
