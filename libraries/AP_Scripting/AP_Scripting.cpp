@@ -153,6 +153,10 @@ MAV_RESULT AP_Scripting::handle_command_int_packet(const mavlink_command_int_t &
             return MAV_RESULT_ACCEPTED;
         case SCRIPTING_CMD_ENUM_END: // cope with MAVLink generator appending to our enum
             break;
+		case SCRIPTING_CMD_STOP:
+			break;
+		case SCRIPTING_CMD_STOP_AND_RESTART:
+			break;
     }
 
     return MAV_RESULT_UNSUPPORTED;

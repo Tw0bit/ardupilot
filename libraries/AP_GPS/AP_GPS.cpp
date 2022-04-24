@@ -1229,23 +1229,6 @@ void AP_GPS::send_mavlink_gps2_raw(mavlink_channel_t chan)
     if (_type[1] == GPS_TYPE_NONE) {
         return;
     }
-
-    const Location &loc = location(1);
-    mavlink_msg_gps2_raw_send(
-        chan,
-        last_fix_time_ms(1)*(uint64_t)1000,
-        status(1),
-        loc.lat,
-        loc.lng,
-        loc.alt * 10UL,
-        get_hdop(1),
-        get_vdop(1),
-        ground_speed(1)*100,  // cm/s
-        ground_course(1)*100, // 1/100 degrees,
-        num_sats(1),
-        state[1].rtk_num_sats,
-        state[1].rtk_age_ms,
-        gps_yaw_cdeg(1));
 }
 #endif // GPS_MAX_RECEIVERS
 

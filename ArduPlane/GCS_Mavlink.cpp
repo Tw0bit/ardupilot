@@ -326,13 +326,14 @@ void GCS_MAVLINK_Plane::send_pid_info(const AP_Logger::PID_Info *pid_info,
     if (!HAVE_PAYLOAD_SPACE(chan, PID_TUNING)) {
         return;
     }
-     mavlink_msg_pid_tuning_send(chan, axis,
+     /*mavlink_msg_pid_tuning_send(chan, axis,
                                  pid_info->target,
                                  achieved,
                                  pid_info->FF,
                                  pid_info->P,
                                  pid_info->I,
                                  pid_info->D);
+								 */
 }
 
 /*

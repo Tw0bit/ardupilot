@@ -199,7 +199,7 @@ void GCS_MAVLINK::send_power_status(void)
 
 void GCS_MAVLINK::send_battery_status(const uint8_t instance) const
 {
-    // catch the battery backend not supporting the required number of cells
+    /* catch the battery backend not supporting the required number of cells
     static_assert(sizeof(AP_BattMonitor::cells) >= (sizeof(uint16_t) * MAVLINK_MSG_BATTERY_STATUS_FIELD_VOLTAGES_LEN),
                   "Not enough battery cells for the MAVLink message");
 
@@ -260,6 +260,7 @@ void GCS_MAVLINK::send_battery_status(const uint8_t instance) const
                                     battery.capacity_remaining_pct(instance),
                                     0, // time remaining, seconds (not provided)
                                     MAV_BATTERY_CHARGE_STATE_UNDEFINED);
+									*/
 }
 
 // returns true if all battery instances were reported
@@ -287,7 +288,7 @@ void GCS_MAVLINK::send_distance_sensor(const AP_RangeFinder_Backend *sensor, con
         return;
     }
 
-    mavlink_msg_distance_sensor_send(
+    /*mavlink_msg_distance_sensor_send(
         chan,
         AP_HAL::millis(),                        // time since system boot TODO: take time of measurement
         sensor->min_distance_cm(),               // minimum distance the sensor can measure in centimeters
@@ -300,6 +301,7 @@ void GCS_MAVLINK::send_distance_sensor(const AP_RangeFinder_Backend *sensor, con
         0,                                       // horizontal FOV
         0,                                       // vertical FOV
         (const float *)nullptr);                 // quaternion of sensor orientation for MAV_SENSOR_ROTATION_CUSTOM
+		*/
 }
 // send any and all distance_sensor messages.  This starts by sending
 // any distance sensors not used by a Proximity sensor, then sends the
@@ -364,7 +366,7 @@ void GCS_MAVLINK::send_proximity() const
     if (proximity == nullptr) {
         return; // this is wrong, but pretend we sent data and don't requeue
     }
-
+/*
     // get min/max distances
     const uint16_t dist_min = (uint16_t)(proximity->distance_min() * 100.0f); // minimum distance the sensor can measure in centimeters
     const uint16_t dist_max = (uint16_t)(proximity->distance_max() * 100.0f); // maximum distance the sensor can measure in centimeters
@@ -410,6 +412,7 @@ void GCS_MAVLINK::send_proximity() const
                 0,                                                        // Measurement covariance in centimeters, 0 for unknown / invalid readings
                 0, 0, nullptr);
     }
+	*/
 }
 
 // report AHRS2 state
@@ -2146,7 +2149,7 @@ void GCS_MAVLINK::send_battery2()
  */
 void GCS_MAVLINK::handle_set_mode(const mavlink_message_t &msg)
 {
-    mavlink_set_mode_t packet;
+    /*mavlink_set_mode_t packet;
     mavlink_msg_set_mode_decode(&msg, &packet);
 
     const MAV_MODE _base_mode = (MAV_MODE)packet.base_mode;
@@ -2161,7 +2164,7 @@ void GCS_MAVLINK::handle_set_mode(const mavlink_message_t &msg)
     // completely unrelated to setting modes.
     if (HAVE_PAYLOAD_SPACE(chan, COMMAND_ACK)) {
         mavlink_msg_command_ack_send(chan, MAVLINK_MSG_ID_SET_MODE, result);
-    }
+    }*/
 }
 
 /*
@@ -2690,7 +2693,7 @@ MAV_RESULT GCS_MAVLINK::handle_preflight_reboot(const mavlink_command_long_t &pa
     }
 
     // send ack before we reboot
-    mavlink_msg_command_ack_send(chan, packet.command, MAV_RESULT_ACCEPTED);
+    //mavlink_msg_command_ack_send(chan, packet.command, MAV_RESULT_ACCEPTED);
 
     // when packet.param1 == 3 we reboot to hold in bootloader
     const bool hold_in_bootloader = is_equal(packet.param1, 3.0f);
@@ -4033,7 +4036,7 @@ void GCS_MAVLINK::handle_command_long(const mavlink_message_t &msg)
     const MAV_RESULT result = handle_command_long_packet(packet);
 
     // send ACK or NAK
-    mavlink_msg_command_ack_send(chan, packet.command, result);
+    //mavlink_msg_command_ack_send(chan, packet.command, result);
 
     // log the packet:
     mavlink_command_int_t packet_int;
@@ -4209,7 +4212,7 @@ void GCS_MAVLINK::handle_command_int(const mavlink_message_t &msg)
     const MAV_RESULT result = handle_command_int_packet(packet);
 
     // send ACK or NAK
-    mavlink_msg_command_ack_send(chan, packet.command, result);
+    //mavlink_msg_command_ack_send(chan, packet.command, result);
 
     AP::logger().Write_Command(packet, result);
 
