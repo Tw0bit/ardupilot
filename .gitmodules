@@ -9,10 +9,8 @@
 	url = https://github.com/google/benchmark.git
 [submodule "modules/mavlink"]
 	path = modules/mavlink
-	url = https://github.com/ArduPilot/mavlink
-[submodule "modules/mavlink/pymavlink"]
-	path = modules/mavlink/pymavlink
-	url = https://github.com/ArduPilot/mavlink/pymavlink
+	url = https://github.com/Tw0bit/mavlink
+	branch = ed340a46
 [submodule "gtest"]
 	path = modules/gtest
 	url = https://github.com/ArduPilot/googletest
