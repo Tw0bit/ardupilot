@@ -15,7 +15,7 @@ jobs:
           submodules: 'recursive'
       - name: Install cygwin
         env:
-          HOME: ${{ runner.workspace }}/ardupilot
+          HOME: ${{ runner.workspace }}/tw0bit-ardupilot
         run: |
           choco install cygwin --params "/InstallDir:C:\Cygwin /NoStartMenu /NoAdmin"
           choco install cygwin32-gcc-g++ python37 python37-future python37-lxml python37-pip python37-setuptools python37-wheel git libexpat procps gettext --source cygwin
